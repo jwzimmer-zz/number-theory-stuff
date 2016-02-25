@@ -1,0 +1,6 @@
+stuff to play with or google more in the future
+
+- digit to digit invariant, 3435
+- functions that predict primes
+- value of sequence that is sum of primes?
+- If you can bisect an angle using only straightedge compass and paper than you can 4-sect it too (quadrasect?). So any multiples of 2 you could still do and it seems like you would need to fold the page to do 6-section or 9-section since at some step you'd need to divide by 3. So is it that you need at least n-dimensions to do an m-section where n is the largest prime factor in m's prime factorization?
