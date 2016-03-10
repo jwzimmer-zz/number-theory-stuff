@@ -50,7 +50,8 @@ def kaprekar_routine(n, iterations=0):
         #print n, newn, largen, smalln, iterations
         return kaprekar_routine(newn, iterations)
 
-#what happens if you use negative numbers? do you loop at (-)6174 still? How would that work?
+#what happens if you use negative numbers? do you loop at (-)6174 still?
+#-> yes, it seems -6174 works as the negative kaprekar constant (if you do large - small)
 def kaprekar_routine_negative(n, iterations=0):
     """Takes a negative integer n and looks for a loop,
     or returns how many iterations
@@ -59,15 +60,36 @@ def kaprekar_routine_negative(n, iterations=0):
     #i'll need to store previous numbers in order to recognize repeating loops
     #i'll need to cut off from doing infinite recursions, since it's possible there won't be any equivalent
     #to kaprekar's constant, and if there are no loops and no constant, then the function would recurse forever
-    #SOME PSEUDOCODE & COPYPASTA:
-    #if n == -6174: # or n is in a loop:
-        #return iterations
-    #else:
-        #stuff
+    #
+    #it doesn't seem like i need to bound the iterations (seems like iterations will be <= 7 like it is for
+    #positive kaprekar's constant) but just in case
+    while iterations <=40:
+        if n == -6174: # or n is in a loop:
+            return iterations
+        else:
+            strn = str(abs(n))
+            if len(strn) < 4:
+                strn = add_0s_front_of_n(strn, 4)
+            else:
+                pass
+            nlist = [int(x) for x in strn]
+            #from small to large digits
+            nlist.sort()
+            #from large to small digits
+            reversedlist = list(reversed(nlist))
+            largen = -1*make_int_from_list(reversedlist)
+            smalln = -1*make_int_from_list(nlist)
+            newn = largen - smalln
+            #largen + smalln doesn't stay bounded in length
+            #newn = largen + smalln
+            iterations += 1
+            #print n, largen, smalln, newn, iterations
+            return kaprekar_routine_negative(newn, iterations)
     return None
 
 def main():
-    print kaprekar_routine(124)
+    print kaprekar_routine_negative(-124)
+    print kaprekar_routine(12)
     
 if __name__ == '__main__':
     main()
